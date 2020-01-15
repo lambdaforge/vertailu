@@ -53,6 +53,7 @@
 ;; Renaming databases
 (d/rename-database datahike-uri "renamed")                  ;; Syntax error: No such var
 (c/rename-database datomic-uri "renamed")                   ;; true
+(c/rename-database "datomic:mem://renamed" "datahike-vs-datomic")
 
 ;; Database from connection
 (d/db (d/connect datahike-uri))                                                ;; #datahike/DB{:schema #:db{:ident #:db{:unique :db.unique/identity}}, :datoms []}

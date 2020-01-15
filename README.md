@@ -23,7 +23,7 @@ This project compares our Datahike API with the Datomic Clojure API.
 - since
 - tempid
 - transact
-- with 
+- with
 
 ## Datahike Only Functions
 
