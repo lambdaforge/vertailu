@@ -56,5 +56,5 @@
 (c/rename-database "datomic:mem://renamed" "datahike-vs-datomic")
 
 ;; Database from connection
-(d/db (d/connect datahike-uri))                                                ;; #datahike/DB{:schema #:db{:ident #:db{:unique :db.unique/identity}}, :datoms []}
-(c/db (c/connect datomic-uri))                                                ;; datomic.db.Db@40f12152
+(d/db (d/connect datahike-uri))                             ;; #datahike/DB{:schema #:db{:ident #:db{:unique :db.unique/identity}}, :datoms []}
+(c/db (c/connect datomic-uri))                              ;; datomic.db.Db@40f12152
