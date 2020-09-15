@@ -2,73 +2,49 @@
 
 This project compares our Datahike API with the Datomic Clojure API.
 
-## Common Functions
+## Comparing Function Signatures
 
-- as-of
-- connect
-- create-database
-- datoms
-- db
-- delete-database
-- entity
-- entity-db
-- filter
-- history
-- is-filtered
-- q
-- release
-- pull
-- pull-many
-- seek-datoms
-- since
-- tempid
-- transact
-- with
+| Datahike | Datomic | Status |
+|----------|---------|--------|
+| (connect config) | (connect client arg-map) | :warning: |
+| (database-exists? config) | - | :x: |
+| (create-database config) | (create-database client arg-map) | :warning: |
+| (delete-database config) | (delete-database client arg-map) | :warning: |
+| (transact conn tx-data) | (transact conn arg-map) | :warning: (rename arg?)|
+| (transact! conn tx-data tx-meta) | - | :x: |
+| (load-entities conn tx-data) | - | :x: |
+| (release conn) | - | :x: |
+| (pull db selector eid) | (pull db selector eid) | :heavy_check_mark: |
+| (pull db selector eid) | (pull db arg-map) | :warning: |
+| (pull-many db selector eids) | - | :x: |
+| (q query & inputs) | (q query & args) | :warning: (rename arg?) |
+| (q query-map) | (q arg-map) | :warning: (rename arg?) |
+| (datoms db index & components | (datoms db arg-map) | :warning: |
+| (seek-datoms db index & components) | - | :x: |
+| (tempid part x) | - | :x: |
+| (entity db eid) | - | :x: |
+| (entity-db entity) | - | :x: |
+| (is-filtered x) | - | :x: |
+| (filter db pred) | - | :x: |
+| (with db tx-data tx-meta) | (with db arg-map) | :warning: (rename arg?) |
+| (db-with db tx-data) | (with-db conn) | :warning: (rename function and args?) |
+| (db conn) | (db conn) | :heavy_check_mark: (ILookup Interface support?) |
+| (history db) | (history db) | :heavy_check_mark: |
+| (as-of db timepoint) | (as-of db time-point) | :heavy_check_mark: |
+| (since db timepoint) | (since db t) | :heavy_check_mark: |
+| - | (administer-system client arg-map) | :warning: |
+| - | (client arg-map) | :warning: |
+| - | (db-stats db) | :warning: |
+| - | (index-pull db arg-map) | :warning: |
+| - | (index-range db arg-map) | :warning: |
+| - | (list-databases client arg-map) | :warning: |
+| - | (qseq arg-map) (qseq query & args) | :warning: |
+| - | (sync conn t) | :warning: |
+| - | (tx-range conn arg-map) | :warning: |
 
-## Datahike Only Functions
-
-- database-exists?
-- db-with
-- transact!
-
-## Datomic Only Functions
-
-- add-listener
-- administer-system
-- as-of-t
-- attribute
-- basis-t
-- entid
-- entid-at
-- function
-- gc-storage
-- get-database-names
-- ident
-- index-range
-- invoke
-- log
-- next-t
-- part
-- query
-- remove-tx-report-queue
-- rename-database
-- request-index
-- resolve-tempid
-- shutdown
-- since-t
-- squuid
-- squuid-time-millis
-- sync
-- sync-excise
-- sync-index
-- sync-schema
-- t->tx
-- touch
-- transact-async
-- tx->t
-- tx-range
-- tx-report-queue
-
+- :heavy_check_mark: means the signature is already comparable
+- :warning: means the signature should probably be matched
+- :x: means the function is only available in Datahike and needs no adjustment
 
 ## License
 
