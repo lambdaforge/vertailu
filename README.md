@@ -6,20 +6,21 @@ This project compares our Datahike API with the Datomic Clojure API.
 
 | Datahike | Datomic | Status |
 |----------|---------|--------|
-| (connect config) | (connect client arg-map) | :warning: |
-| (database-exists? config) | - | :x: |
-| (create-database config) | (create-database client arg-map) | :warning: |
-| (delete-database config) | (delete-database client arg-map) | :warning: |
-| (transact conn tx-data) | (transact conn arg-map) | :warning: (rename arg?)|
-| (transact! conn tx-data tx-meta) | - | :x: |
-| (load-entities conn tx-data) | - | :x: |
-| (release conn) | - | :x: |
+| (connect arg-map) | (connect client arg-map) | :warning: (rename does not make sense) |
+| (database-exists? arg-map) | - | :heavy_check_mark: (remains unchanged)|
+| (create-database config) | (create-database client arg-map) | :warning: (rename does not make sense) |
+| (delete-database config) | (delete-database client arg-map) | :warning: (rename does not make sense) |
+| (transact conn tx-data) | (transact conn arg-map) | :heavy_check_mark: (adapted)|
+| (transact! conn tx-data tx-meta) | - | :heavy_check_mark: (removed) |
+| (load-entities conn tx-data) | - | :heavy_check_mark: |
+| (release conn) | - | :heavy_check_mark: |
 | (pull db selector eid) | (pull db selector eid) | :heavy_check_mark: |
-| (pull db selector eid) | (pull db arg-map) | :warning: |
-| (pull-many db selector eids) | - | :x: |
-| (q query & inputs) | (q query & args) | :warning: (rename arg?) |
-| (q query-map) | (q arg-map) | :warning: (rename arg?) |
-| (datoms db index & components | (datoms db arg-map) | :warning: |
+| (pull db selector eid) | (pull db arg-map) | :heavy_check_mark: (arity added) |
+| (pull-many db selector eids) | - | :heavy_check_mark: |
+| (q query & inputs) | (q query & args) | :warning: (query-type? map? list? string?) |
+| (q query-map) | (q arg-map) | :warning: (:timeout?) |
+| (datoms db index & components) | (datoms db arg-map) | :heavy_check_mark: (adapted)|
+| (datoms db arg-map)            |                     | tests need to pass         |
 | (seek-datoms db index & components) | - | :x: |
 | (tempid part x) | - | :x: |
 | (entity db eid) | - | :x: |
